@@ -1,0 +1,125 @@
+#1
+[SELECT | FROM | WHERE]
+
+select * from sales.customers
+where city = 'houston'
+
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-select/
+
+Analysis:
+/* The classic SELECT statement selects FROM a schema ('sales'),
+   while 'customers' is the table that is related to 'sales.'
+   Therefore using FROM statement should have format like this
+   [schema_name.table_name]
+
+   WHERE statement can further specify the condition of the query 
+   that it will further narrowing down the search. 
+   WHERE statement along with HAVING, GROUP BY, ORDER BY,
+   and others are SQL Clauses.
+*/
+
+-----------------------------------------------------
+
+#2
+[WHERE | GROUP BY | ORDER BY]
+
+SELECT
+    first_name,
+    last_name,
+    customer_id
+FROM
+    sales.customers
+WHERE
+    customer_id >= 20
+GROUP BY
+    first_name,
+    last_name,
+    customer_id
+ORDER BY
+    customer_id
+
+[210_IMG2]
+
+Source: Self Programmed Query
+
+Analysis:
+/* With ORDER BY, I can sort the table specified in an ascending 
+   order. In this example, I have used 'customer_id' to be sorted.
+   Noticed that 'customer_id' started with 20, which that is because
+   the WHERE have a condition that 'customer_id' is at or more than 20.
+*/
+
+---------------------------------------------------------------
+
+#3
+[HAVING]
+
+SELECT
+    first_name,
+    last_name,
+    customer_id
+FROM
+    sales.customers
+WHERE
+    customer_id BETWEEN 20 AND 30
+GROUP BY
+    first_name,
+    last_name,
+    customer_id
+HAVING 
+    customer_id >25	
+ORDER BY
+    customer_id
+
+[210_IMG3]
+
+Source: Self Programmed Query
+
+/* HAVING clause works with a condition and the condition in the
+   example is 'customer_id' is more than 25. Even though I can specify
+   than in the WHERE clause, however, this to shows that WHERE and HAVING
+   can be in the same query. 
+*/
+
+-----------------------------------------------------------------
+
+#4
+[HAVING AND WHERE Comparison]
+
+SELECT
+    first_name,
+    last_name,
+    customer_id,
+    state
+FROM
+    sales.customers
+WHERE
+    zip_code >= 30000
+GROUP BY
+    first_name,
+    last_name,
+    customer_id,
+    state
+HAVING 
+    customer_id >25	
+ORDER BY
+    state
+
+[210_IMG4]
+
+Source: Self Programmed Query
+
+Analysis:
+/* WHERE clause can be based off on any column in the base table and 
+   HAVING clause only can refer to the result of the SELECT statement 
+   or the GROUP BY clause.
+   To illustrate this concept, the WHERE clause is set to have condition
+   of a 'zipcode' table that is or higher than 30000. Notice that zipcode
+   are not part of the SELECT statement. Whereas HAVING is bound by the 
+   SELECT and GROUP BY
+*/
+
+
+
