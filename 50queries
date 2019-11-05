@@ -121,5 +121,132 @@ Analysis:
    SELECT and GROUP BY
 */
 
+--------------------------------------------------------------------------
+#5
+[SELECT DISTINCT]
+
+SELECT DISTINCT state
+
+from sales.customers;
+
+[210_IMG5]
+
+/* SELECT DISTINCT as simple as it may seems, it does the same thing as
+   query #1 does, which it is to narrow down the search in a particular 
+   search but with leaving out WHERE clause. I believe the reasoning behind 
+   it for using distinct instead of WHERE clause, is when you know exactly 
+   what you're searching and that the search will return with a true result
+   instead of WHERE clause that is a condition, and that condition may or may
+   not return a true result. 
+*/
+
+---------------------------------------------------------------------------------
+
+#6
+[LIKE operator]
+
+SELECT first_name, email, city, state, zip_code
+FROM sales.customers
+WHERE email LIKE '%gmail%';
+
+[210_IMG6]
+
+/* The query I was looking for in the bike shop is to find the first name, email,
+   city, state and zipcodes of users that have email account that is GMAIL. 
+   Therefore in this query I have used the WHERE clause to define the condition
+   and LIKE operator to filter the results from the sales.customer table with the 
+   specific result list using SELECT statement
+*/
+
+----------------------------------------------------------------------------------
+
+#7
+[NULL logic]
+
+SELECT *
+FROM sales.customers
+WHERE phone is NULL
+
+[210_IMG7]
+
+/* The NULL logic is used to find empty value by assigning it to a search condition
+   or clause. Which in this case, I will be using WHERE clause to find customer's 
+   contact information that does not have a phone number. From a business perspective,
+   I'll be able to email or send them a personal letter to connect and build relationships
+   with the customers, as well as updating personal information such as phone number.
+   I specifically SELECT all columns, which is the customer contact information, but 
+   with the result with only customers that do not have phone number on file in the database.
+*/
+
+----------------------------------------------------------------------------------
+
+#8
+[AND operator]
+
+SELECT *
+FROM sales.customers
+WHERE phone is NULL
+AND state = 'CA'
+AND zip_code < 93000
+ORDER BY zip_code ASC;
+
+[210_IMG8]
+
+/* The AND operator is a boolean expression where it would return a value that is 
+   either TRUE, FALSE, or UNKNOWN. I'm using the previous query result to showcase 
+   AND operator to find a specific state in which in the example would be CA and 
+   I further define the condition to be zipcode number would be anything below '93000.' 
+*/
+
+----------------------------------------------------------------------------------
+
+#9
+[OR operator]
+
+SELECT *
+FROM
+    production.products
+WHERE
+category_id = 6
+or
+brand_id > 7
+ORDER BY list_price ASC;
+
+[210_IMG9]
+
+/* The OR operator would take the condition define and combine them as a result if
+   the condition result is TRUE. In the example, I placed 2 conditions to be met 
+   where category by ID have to be 6 and brand ID can be anything above 7, and then
+   order them by ascending in price.
+*/
+
+----------------------------------------------------------------------------------
+
+#10
+[BETWEEN operator]
+
+SELECT *
+FROM
+    production.products
+WHERE
+category_id = 6 or category_id = 7
+ORDER BY list_price ASC;
+-------------------------------------
+SELECT *
+FROM
+    production.products
+WHERE
+category_id between 6 and 7
+ORDER BY list_price ASC;
+
+[210_IMG10]
+
+/* The BETWEEN operator works like the < and > comparison and both can replace BETWEEN
+   and would work the same. Another operator that would give the same result would be
+   the OR operator.
+*/
+
+----------------------------------------------------------------------------------
+
 
 
