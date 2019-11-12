@@ -248,5 +248,299 @@ ORDER BY list_price ASC;
 
 ----------------------------------------------------------------------------------
 
+#11
+[Alias]
+
+SELECT first_name + ' ' + last_name AS Full_Name, 
+       city + ', ' + state AS Location
+FROM sales.customers
+ORDER BY state;
+
+[210_IMG11]
+
+/* Alias work by putting 'AS' to combine two information into one and named it
+   entirely different. In the example, I have took the last name and first name 
+   combined it to make the full name. Same as for the location. This makes the data
+   information more complete for user to read it easily.
+*/
+
+----------------------------------------------------------------------------------
+
+#12
+[Alias] 
+
+SELECT 
+    product_name 'Products', list_price 'Price'
+FROM 
+    production.products
+ORDER BY 
+   'Price';
+
+[210_IMG12]
+
+/* While the example above combines information of 2 columns, this example shows 
+   that alias can be assigned to a column without the combination and without
+   'AS' 
+*/
+
+----------------------------------------------------------------------------------
+
+#13
+[GROUP BY]
+
+SELECT
+    customer_id,
+    YEAR (order_date) order_year,
+    COUNT (order_id) order_placed
+FROM
+    sales.orders
+WHERE
+    customer_id IN (1, 2)
+GROUP BY
+    customer_id,
+    YEAR (order_date)
+ORDER BY
+    customer_id; 
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-group-by/
+
+[210_IMG13]
+
+/* This query with GROUP BY clause uses aggregate function like 'COUNT' to perform
+   calculation. For this matter, the count will increase by the number of times
+   the customer would order each year based on customer_id and order_id.
+*/
+
+----------------------------------------------------------------------------------
+
+#14
+[GROUP BY]
+
+SELECT
+    city,
+    COUNT (customer_id) customer_count
+FROM
+    sales.customers
+GROUP BY
+    city
+ORDER BY
+    city;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-group-by/
+
+[210_IMG14]
+
+/* Just like the example on #13, this type of queries can improve the quality of
+   business strategy in a company. If a specific location that has low customer 
+   count but in a large city (ratio of customer to number of people in the city)
+   then maybe this bike store strategies marketing effort in the specific location.
+*/
+
+----------------------------------------------------------------------------------
+
+#15
+[Aggregate Functions]
+
+SELECT
+    brand_name,
+    MIN (list_price) min_price,
+    MAX (list_price) max_price
+FROM
+    production.products p
+INNER JOIN production.brands b ON b.brand_id = p.brand_id
+WHERE
+    model_year = 2018
+GROUP BY
+    brand_name
+ORDER BY
+    brand_name;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-group-by/
+
+[210_IMG15]
+
+/* Using MIN and MAX, this query is able to pull information from list_price and
+   run calculation of the minimum and maximum price sorted by brand name and model
+   year. As goes to analysis of possible bike category and also the spending from
+   each city or state. Just a simple query provides valuable information in helping
+   to analyse a business strategy.
+*/
+
+----------------------------------------------------------------------------------
+
+#16
+[Subqueries]
+
+SELECT
+    product_name,
+    list_price
+FROM
+    production.products
+WHERE
+    list_price > (
+        SELECT
+            AVG (list_price)
+        FROM
+            production.products
+        WHERE
+            brand_id IN (
+                SELECT
+                    brand_id
+                FROM
+                    production.brands
+                WHERE
+                    brand_name = 'Strider'
+                OR brand_name = 'Trek'
+            )
+    )
+ORDER BY
+    list_price;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-subquery/
+
+[210_IMG16]
+
+/* This query is example of a subquery nesting where if information and filteration
+   of data is complex, then subqueries can be used. In SQL Server, subqueries can be
+   used up to 32 levels of nesting.
+*/
+
+----------------------------------------------------------------------------------
+
+#17
+[Subqueries and Expression]
+
+SELECT
+    order_id,
+    order_date,
+    (
+        SELECT
+            MAX (list_price)
+        FROM
+            sales.order_items i
+        WHERE
+            i.order_id = o.order_id
+    ) AS max_list_price
+FROM
+    sales.orders o
+order by order_date desc;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-subquery/
+
+[210_IMG17]
+
+/* Within the subquery and nesting, expression can further narrow down the data
+   information. In this example, the expression compute the maximum price from 
+   list_price and list it as max_list_price within the subquery nesting.
+*/
+
+----------------------------------------------------------------------------------
+
+#18
+[EXIST operator]
+
+SELECT
+    customer_id,
+    first_name,
+    last_name,
+    city
+FROM
+    sales.customers c
+WHERE
+    EXISTS (
+        SELECT
+            customer_id
+        FROM
+            sales.orders o
+        WHERE
+            o.customer_id = c.customer_id
+        AND YEAR (order_date) = 2017
+    )
+ORDER BY
+    first_name,
+    last_name;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-subquery/
+
+[210_IMG18]
+
+/* Using the subquery example, this query also illustrate the EXIST operator where
+   if the subquery return result, then the EXIST operator will return TRUE. This 
+   example would find customers that bought products from the bike store in the year
+   of 2017.
+*/
+
+----------------------------------------------------------------------------------
+
+#19
+[Correlation subquery]
+
+SELECT
+    customer_id,
+    first_name,
+    last_name
+FROM
+    sales.customers c
+WHERE
+    EXISTS (
+        SELECT
+            COUNT (*)
+        FROM
+            sales.orders o
+        WHERE
+            customer_id = c.customer_id
+        GROUP BY
+            customer_id
+        HAVING
+            COUNT (*) > 2
+    )
+ORDER BY
+    first_name,
+    last_name;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-subquery/
+
+[210_IMG19]
+
+/* Within this query, it uses EXIST within a subquery and also HAVING clause that
+   includes count more than 2. It means that this query would find customers that 
+   have ordered from the bike store for more than twice. This query can also further
+   break down into by year, city or state.
+*/
+
+----------------------------------------------------------------------------------
+
+#20
+[UNION]
+
+SELECT
+    first_name,
+    last_name
+FROM
+    sales.staffs
+UNION ALL
+SELECT
+    first_name,
+    last_name
+FROM
+    sales.customers;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-union/
+
+[210_IMG20]
+
+/* Using union, it combines rows from queries into a single result set where in 
+   this example, it combines the first name and last name from staffs and customers
+   into a single result set.
+*/
+
+----------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
 
