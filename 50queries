@@ -4,7 +4,7 @@
 select * from sales.customers
 where city = 'houston'
 
-
+![210_IMG1](https://user-images.githubusercontent.com/55178196/68712151-f89fd100-054f-11ea-96f3-ee71ddc78429.PNG)
 
 Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-select/
 
