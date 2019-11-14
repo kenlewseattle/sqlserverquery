@@ -11,8 +11,8 @@ fundamentals that I have learned either through class or through the
 textbook.
 
 This specific repository should have 50 queries along with it's output
-and my feedback on understanding of the query. The sample database that I am 
-using is from the website http://www.sqlservertutorial.net
+and my feedback on understanding of the query. The sample database and examples that I am 
+using are from the website http://www.sqlservertutorial.net
 
 Please feel free to reach out to me if you have any feedback regarding 
 the queries or if it can be further improved! Also, I will have another repository 
