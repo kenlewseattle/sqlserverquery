@@ -535,6 +535,257 @@ Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-union/
 */
 
 ----------------------------------------------------------------------------------
+#21
+[SCHEMA]
+
+CREATE SCHEMA hr;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-joins/
+
+[210_IMG21]
+
+/* Using create, I can create schema or even tables into the schema
+*/
+
+----------------------------------------------------------------------------------
+
+#22
+[CREATE]
+
+CREATE TABLE hr.candidates(
+    id INT PRIMARY KEY IDENTITY,
+    fullname VARCHAR(100) NOT NULL
+);
+ 
+CREATE TABLE hr.employees(
+    id INT PRIMARY KEY IDENTITY,
+    fullname VARCHAR(100) NOT NULL
+);
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-joins/
+
+[210_IMG22]
+
+/* Using create, I can create schema or even tables into the schema. The 'id'
+   will be the PRIMARY KEY and would contain full name.
+*/
+
+----------------------------------------------------------------------------------
+
+#24
+[I]
+
+INSERT INTO 
+    hr.candidates(fullname)
+VALUES
+    ('Kenneth Monroe'),
+    ('Lewis Wang'),
+    ('Peter Chap'),
+    ('Jane Lane');
+ 
+ 
+INSERT INTO 
+    hr.employees(fullname)
+VALUES
+    ('Kenny Lew'),
+    ('Joe Langley'),
+    ('Michael Scotty'),
+    ('Jack Sparrow');
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-joins/
+
+[210_IMG23]
+
+/* Insert into is self explanatory where I can enter information regarding 
+   the table I've just created. All those values will be inserted into candidates
+   and employees tables under 'hr' schema respectively.
+*/
+
+----------------------------------------------------------------------------------
+
+#24
+[INNER JOIN]
+
+SELECT  
+    c.id ,
+    c.fullname ,
+    e.id ,
+    e.fullname 
+FROM 
+    hr.candidates c
+    INNER JOIN hr.employees e 
+        ON e.fullname = c.fullname;
+    
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-joins/
+
+[210_IMG24]
+
+/* Basically by selecting 'id' and 'fullname' from 'c' which is the customer, and
+   the same for employee, to joint them when the condition (fullname that is in both
+   employee and candidate) is met. This is to ensure that HR department able to clean
+   up candidate records if and when the candidate is hired as an employee but would 
+   still have records as a candidate.
+*/
+
+----------------------------------------------------------------------------------
+
+#25
+[Header]
+
+SELECT  
+    c.id candidate_id,
+    c.fullname candidate_name,
+    e.id employee_id,
+    e.fullname employee_name
+FROM 
+    hr.candidates c
+    INNER JOIN hr.employees e 
+        ON e.fullname = c.fullname;
+    
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-joins/
+
+[210_IMG25]
+
+/* The same as example #24, I can rename/replace the header with any name that 
+   needed to be changed. From #24, I have c.id and e.id where now, I can replace
+   it with Candidate_id and Employee_id or other any name that make sense to the 
+   data. This little change is important as organization to do data manipulation 
+   where information constantly gets updated.
+*/
+
+----------------------------------------------------------------------------------
+
+#26
+[LEFT JOIN]
+
+SELECT  
+ c.id candidate_id,
+ c.fullname candidate_name,
+ e.id employee_id,
+ e.fullname employee_name
+FROM 
+ hr.candidates c
+ LEFT JOIN hr.employees e 
+ ON e.fullname = c.fullname;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-joins/
+
+[210_IMG26]
+
+/* While example #25 uses inner join, where the data from tables with the condition
+   create a combined data as the information. However for #26, LEFT JOIN is used 
+   to put more emphasis on 'hr.candidates' and the condition for this LEFT JOIN is
+   to find all candidate names that also might be in the 'hr.employees' table. If not
+   'null' is present in the employee section.
+*/
+
+----------------------------------------------------------------------------------
+
+#27
+[RIGHT JOIN]
+
+SELECT  
+    c.id candidate_id,
+    c.fullname candidate_name,
+    e.id employee_id,
+    e.fullname employee_name
+FROM 
+    hr.candidates c
+    RIGHT JOIN hr.employees e 
+        ON e.fullname = c.fullname;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-joins/
+
+[210_IMG27]
+
+/* Same as the example above where LEFT JOIN put more emphasis on 'hr.candidates',
+   RIGHT JOIN emphasis more on 'hr.employees'. This is where all information of the
+   table from employees will appear and if employee is not a candidate, then in 
+   'hr.candidate' will appear as NULL
+*/
+
+----------------------------------------------------------------------------------
+
+#28
+[FULL JOIN]
+
+SELECT  
+    c.id candidate_id,
+    c.fullname candidate_name,
+    e.id employee_id,
+    e.fullname employee_name
+FROM 
+    hr.candidates c
+    FULL JOIN hr.employees e 
+        ON e.fullname = c.fullname;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-joins/
+
+[210_IMG28]
+
+/* FULL JOIN will combine both RIGHT and LEFT JOIN as well can see where both
+   employees and candidates have NULL information in their respective column. 
+   This gives more visiblility to the overall data, however because it is broad,
+   depending on what information is requested, RIGHT and LEFT join will narrow down
+   the specific query.
+*/
+
+----------------------------------------------------------------------------------
+
+#29
+[LEFT JOIN | ORDER BY]
+
+SELECT
+    product_name,
+    order_id
+FROM
+    production.products p
+LEFT JOIN sales.order_items o ON o.product_id = p.product_id
+ORDER BY
+    order_id;
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-left-join/
+
+[210_IMG29]
+
+/* Using LEFT JOIN, provided that the two tables have link between the table column,
+   this shows that by querying the product and the order, adn order it by 'order_id',
+   would help business to have visiblity which product was not being sold or have any
+   orders.
+*/
+
+----------------------------------------------------------------------------------
+
+#30
+[RIGHT JOIN | WHERE | ORDER BY]
+
+SELECT
+    product_name,
+    order_id
+FROM
+    sales.order_items o
+    RIGHT JOIN production.products p 
+        ON o.product_id = p.product_id
+WHERE 
+    order_id IS NULL
+ORDER BY
+    product_name;
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-left-join/
+
+[210_IMG30]
+
+/* Alternatively, using RIGHT JOIN will give almost the same result as #29.
+   The focus now shift to the product in this RIGHT JOIN. Include 'WHERE' will
+   narrow down the search even more concise. That the focus is on the product,
+   the query result will only be order_id that is NULL.
+*/
+
+----------------------------------------------------------------------------------
 
 
 
