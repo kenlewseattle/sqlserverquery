@@ -1,14 +1,53 @@
+******SQL Server Research Project Repository******
+
+This is my project/portfolio for SQL Server class 
+at Saint Martin's University. Purpose of this research
+project is to demostrate my understanding of SQL Server 2016
+through actual queries and its output. My goal is to input queries 
+that have combination of statements that would be beyond the basic 
+fundamentals that I have learned either through class or through the
+textbook.
+
+This specific repository should have 50 queries along with it's output
+and my feedback on understanding of the query. The sample database that I am 
+using is from the website SQLServerTutorials.net [Insert Hyperlink]
+
+Please feel free to reach out to me if you have any feedback regarding 
+the queries or if it can be further improved! Also, I have another repository 
+that have comparison between SQL Server and SQLite on their capabilities and 
+structure, that you can view it here!
+[Insert Hyperlink]
+
+Alright, let's get started!
+
+On the below would be a sample of the structure that I will be consistently
+using throughout the 50 queries.
+
+---------------------------------------------------------------------------------
+Sample Structure:
+[SELECT statement]
+
+SELECT
+    first_name,
+    last_name
+FROM
+    sales.customers;
+
+Source: Self-Programmed
+
+/* The query would select the first and last name
+   of the customers from sales table */
+
+---------------------------------------------------------------------------------
+
 #1
 [SELECT | FROM | WHERE]
 
 select * from sales.customers
 where city = 'houston'
 
-![210_IMG1](https://user-images.githubusercontent.com/55178196/68712151-f89fd100-054f-11ea-96f3-ee71ddc78429.PNG)
+Source: Self-Programmed
 
-Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-select/
-
-Analysis:
 /* The classic SELECT statement selects FROM a schema ('sales'),
    while 'customers' is the table that is related to 'sales.'
    Therefore using FROM statement should have format like this
@@ -20,7 +59,7 @@ Analysis:
    and others are SQL Clauses.
 */
 
------------------------------------------------------
+---------------------------------------------------------------------------------
 
 #2
 [WHERE | GROUP BY | ORDER BY]
@@ -40,18 +79,15 @@ GROUP BY
 ORDER BY
     customer_id
 
-[210_IMG2]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-where/
 
-Source: Self Programmed Query
-
-Analysis:
 /* With ORDER BY, I can sort the table specified in an ascending 
    order. In this example, I have used 'customer_id' to be sorted.
    Noticed that 'customer_id' started with 20, which that is because
    the WHERE have a condition that 'customer_id' is at or more than 20.
 */
 
----------------------------------------------------------------
+---------------------------------------------------------------------------------
 
 #3
 [HAVING]
@@ -73,9 +109,7 @@ HAVING
 ORDER BY
     customer_id
 
-[210_IMG3]
-
-Source: Self Programmed Query
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-having/
 
 /* HAVING clause works with a condition and the condition in the
    example is 'customer_id' is more than 25. Even though I can specify
@@ -83,7 +117,7 @@ Source: Self Programmed Query
    can be in the same query. 
 */
 
------------------------------------------------------------------
+---------------------------------------------------------------------------------
 
 #4
 [HAVING AND WHERE Comparison]
@@ -107,11 +141,8 @@ HAVING
 ORDER BY
     state
 
-[210_IMG4]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-having/
 
-Source: Self Programmed Query
-
-Analysis:
 /* WHERE clause can be based off on any column in the base table and 
    HAVING clause only can refer to the result of the SELECT statement 
    or the GROUP BY clause.
@@ -121,7 +152,8 @@ Analysis:
    SELECT and GROUP BY
 */
 
---------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
 #5
 [SELECT DISTINCT]
 
@@ -129,7 +161,7 @@ SELECT DISTINCT state
 
 from sales.customers;
 
-[210_IMG5]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-select-distinct/
 
 /* SELECT DISTINCT as simple as it may seems, it does the same thing as
    query #1 does, which it is to narrow down the search in a particular 
@@ -149,7 +181,7 @@ SELECT first_name, email, city, state, zip_code
 FROM sales.customers
 WHERE email LIKE '%gmail%';
 
-[210_IMG6]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-like/
 
 /* The query I was looking for in the bike shop is to find the first name, email,
    city, state and zipcodes of users that have email account that is GMAIL. 
@@ -167,7 +199,7 @@ SELECT *
 FROM sales.customers
 WHERE phone is NULL
 
-[210_IMG7]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-null/
 
 /* The NULL logic is used to find empty value by assigning it to a search condition
    or clause. Which in this case, I will be using WHERE clause to find customer's 
@@ -190,7 +222,7 @@ AND state = 'CA'
 AND zip_code < 93000
 ORDER BY zip_code ASC;
 
-[210_IMG8]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-and/
 
 /* The AND operator is a boolean expression where it would return a value that is 
    either TRUE, FALSE, or UNKNOWN. I'm using the previous query result to showcase 
@@ -212,7 +244,7 @@ or
 brand_id > 7
 ORDER BY list_price ASC;
 
-[210_IMG9]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-or/
 
 /* The OR operator would take the condition define and combine them as a result if
    the condition result is TRUE. In the example, I placed 2 conditions to be met 
@@ -239,7 +271,7 @@ WHERE
 category_id between 6 and 7
 ORDER BY list_price ASC;
 
-[210_IMG10]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-between/
 
 /* The BETWEEN operator works like the < and > comparison and both can replace BETWEEN
    and would work the same. Another operator that would give the same result would be
@@ -256,7 +288,7 @@ SELECT first_name + ' ' + last_name AS Full_Name,
 FROM sales.customers
 ORDER BY state;
 
-[210_IMG11]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-alias/
 
 /* Alias work by putting 'AS' to combine two information into one and named it
    entirely different. In the example, I have took the last name and first name 
@@ -276,7 +308,7 @@ FROM
 ORDER BY 
    'Price';
 
-[210_IMG12]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-alias/
 
 /* While the example above combines information of 2 columns, this example shows 
    that alias can be assigned to a column without the combination and without
@@ -304,8 +336,6 @@ ORDER BY
 
 Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-group-by/
 
-[210_IMG13]
-
 /* This query with GROUP BY clause uses aggregate function like 'COUNT' to perform
    calculation. For this matter, the count will increase by the number of times
    the customer would order each year based on customer_id and order_id.
@@ -327,8 +357,6 @@ ORDER BY
     city;
 
 Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-group-by/
-
-[210_IMG14]
 
 /* Just like the example on #13, this type of queries can improve the quality of
    business strategy in a company. If a specific location that has low customer 
@@ -355,9 +383,7 @@ GROUP BY
 ORDER BY
     brand_name;
 
-Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-group-by/
-
-[210_IMG15]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-inner-join/
 
 /* Using MIN and MAX, this query is able to pull information from list_price and
    run calculation of the minimum and maximum price sorted by brand name and model
@@ -398,8 +424,6 @@ ORDER BY
 
 Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-subquery/
 
-[210_IMG16]
-
 /* This query is example of a subquery nesting where if information and filteration
    of data is complex, then subqueries can be used. In SQL Server, subqueries can be
    used up to 32 levels of nesting.
@@ -426,8 +450,6 @@ FROM
 order by order_date desc;
 
 Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-subquery/
-
-[210_IMG17]
 
 /* Within the subquery and nesting, expression can further narrow down the data
    information. In this example, the expression compute the maximum price from 
@@ -460,9 +482,7 @@ ORDER BY
     first_name,
     last_name;
 
-Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-subquery/
-
-[210_IMG18]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-exists/
 
 /* Using the subquery example, this query also illustrate the EXIST operator where
    if the subquery return result, then the EXIST operator will return TRUE. This 
@@ -500,8 +520,6 @@ ORDER BY
 
 Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-subquery/
 
-[210_IMG19]
-
 /* Within this query, it uses EXIST within a subquery and also HAVING clause that
    includes count more than 2. It means that this query would find customers that 
    have ordered from the bike store for more than twice. This query can also further
@@ -527,22 +545,19 @@ FROM
 
 Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-union/
 
-[210_IMG20]
-
 /* Using union, it combines rows from queries into a single result set where in 
    this example, it combines the first name and last name from staffs and customers
    into a single result set.
 */
 
 ----------------------------------------------------------------------------------
+
 #21
 [SCHEMA]
 
 CREATE SCHEMA hr;
 
 Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-joins/
-
-[210_IMG21]
 
 /* Using create, I can create schema or even tables into the schema
 */
@@ -562,9 +577,7 @@ CREATE TABLE hr.employees(
     fullname VARCHAR(100) NOT NULL
 );
 
-Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-joins/
-
-[210_IMG22]
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-create-table/
 
 /* Using create, I can create schema or even tables into the schema. The 'id'
    will be the PRIMARY KEY and would contain full name.
@@ -787,11 +800,684 @@ Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-left-join/
 
 ----------------------------------------------------------------------------------
 
+#31
+[INNER JOIN | ROLLUP setup]
+
+SELECT
+    b.brand_name AS brand,
+    c.category_name AS category,
+    p.model_year,
+    round(
+        SUM (
+            quantity * i.list_price * (1 - discount)
+        ),
+        0
+    ) sales INTO sales.sales_summary
+FROM
+    sales.order_items i
+INNER JOIN production.products p ON p.product_id = i.product_id
+INNER JOIN production.brands b ON b.brand_id = p.brand_id
+INNER JOIN production.categories c ON c.category_id = p.category_id
+GROUP BY
+    b.brand_name,
+    c.category_name,
+    p.model_year
+ORDER BY
+    b.brand_name,
+    c.category_name,
+    p.model_year;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-rollup/
+
+Output: 
+(41 rows affected)
+
+Completion time: 2019-12-09T08:59:19.7200263-08:00
+
+/* Using inner join, this query combined information from brand, category, and
+   model into respective names and then retrieve sales amount data by those
+   information into the sales.sales_summary table
+*/
+
+----------------------------------------------------------------------------------
+
+#32
+[Grouping Set]
+
+SELECT
+    brand,
+    category,
+    SUM (sales) sales
+FROM
+    sales.sales_summary
+GROUP BY
+    brand,
+    category
+ORDER BY
+    brand,
+    category;
 
 
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-grouping-sets/
+
+/* This query shows that we can calculate the sum of the sales by sorting into
+   brand and category to create a total amount. Respectively, we can also sort
+   by brand or just the category to get the total amount of sales according
+   to the data requested.
+*/
+
+----------------------------------------------------------------------------------
+
+#33
+[Grouping Set]
+
+SELECT
+    SUM (sales) sales
+FROM
+    sales.sales_summary;
 
 
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-grouping-sets/
+
+/* Another useful query would be that, the total sum of the sales can be calculated
+   by using the same concept but without sorting by brand nor category, then it will
+   show an output of the total sales from the sales summary. In the database that I
+   have used, which would be the bike store, have a total sales of $7,689,113.00
+*/
+
+----------------------------------------------------------------------------------
+
+#34
+[ROLLUP]
+
+SELECT
+    brand,
+    category,
+    SUM (sales) sales
+FROM
+    sales.sales_summary
+GROUP BY
+    ROLLUP(brand, category);
 
 
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-rollup/
 
+/* ROLLUP usage is to calculate aggregation of value based upon hierarchical order.
+   In this query, it goes from brand > category, and where SUM (sales) sales, will 
+   pull in information/data from brand and category and display the total sales of
+   those columns. The output is similar to the one we looked at in query #32, as 
+   ROLLUP is using group set but can generate multiple group set of a hierarchical
+   input column.
+*/
+
+----------------------------------------------------------------------------------
+
+#35
+[PRE - INSERT setup]
+
+CREATE TABLE sales.promotions (
+    promotion_id INT PRIMARY KEY IDENTITY (1, 1),
+    promotion_name VARCHAR (255) NOT NULL,
+    discount NUMERIC (3, 2) DEFAULT 0,
+    start_date DATE NOT NULL,
+    expired_date DATE NOT NULL
+); 
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-insert/
+
+Commands completed successfully.
+
+Completion time: 2019-12-09T09:49:32.4190259-08:00
+
+
+/* Before we can insert information or data into the table, we first need to create
+   a table with defining columns and what contains in that column. 
+*/
+
+----------------------------------------------------------------------------------
+
+#36
+[INSERT]
+
+CREATE TABLE sales.promotions (
+    promotion_id INT PRIMARY KEY IDENTITY (1, 1),
+    promotion_name VARCHAR (255) NOT NULL,
+    discount NUMERIC (3, 2) DEFAULT 0,
+    start_date DATE NOT NULL,
+    expired_date DATE NOT NULL
+); 
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-insert/
+
+Commands completed successfully.
+
+Completion time: 2019-12-09T09:49:32.4190259-08:00
+
+
+/* Before we can insert information or data into the table, we first need to create
+   a table with defining columns and what contains in that column. 
+*/
+
+----------------------------------------------------------------------------------
+
+
+#37
+[INSERT -- 1]
+
+INSERT INTO sales.promotions (
+    promotion_name,
+    discount,
+    start_date,
+    expired_date
+)
+VALUES
+    (
+        '2020 Summer Promotion',
+        0.30,
+        '20200601',
+        '20200901'
+    ); 
+
+----------------------------------
+
+SELECT
+    *
+FROM
+    sales.promotions;
+
+----------------------------------
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-insert/
+
+(1 row affected)
+
+Completion time: 2019-12-09T13:40:18.1565897-08:00
+
+[210_IMG37]
+
+/* After creation of the table, we can input data into the column that we have 
+   created
+*/
+
+----------------------------------------------------------------------------------
+
+#38
+[INSERT / OUTPUT -- 2]
+
+INSERT INTO sales.promotions (
+    promotion_name,
+    discount,
+    start_date,
+    expired_date
+) OUTPUT inserted.promotion_id,
+ inserted.promotion_name,
+ inserted.discount,
+ inserted.start_date,
+ inserted.expired_date
+VALUES
+    (
+        '2018 Winter Promotion',
+        0.2,
+        '20181201',
+        '20190101'
+    );
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-insert/
+
+/* Using output clause, I can insert the specific values into the columns in tables
+   and show the values that was inserted into specific column using OUTPUT clause.
+*/
+
+----------------------------------------------------------------------------------
+
+#39
+[INSERT -- 3]
+
+INSERT INTO sales.promotions (
+    promotion_name,
+    discount,
+    start_date,
+    expired_date
+)
+VALUES
+    (
+        '2019 Summer Promotion',
+        0.15,
+        '20190601',
+        '20190901'
+    ),
+    (
+        '2019 Fall Promotion',
+        0.20,
+        '20191001',
+        '20191101'
+    ),
+    (
+        '2019 Winter Promotion',
+        0.25,
+        '20191201',
+        '20200101'
+    );
+----------------------------------
+
+SELECT
+    *
+FROM
+    sales.promotions;
+
+----------------------------------
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-insert/
+
+(3 rows affected)
+
+Completion time: 2019-12-09T14:12:48.2077251-08:00
+
+/* If multiple values are known, then I would be able to insert multiple entries in
+   one query. Then it gives more efficiency, if the values are known ahead of time,
+   without multiple data entry/queries.
+*/
+
+----------------------------------------------------------------------------------
+
+#40
+[INSERT INTO SELECT]
+
+CREATE TABLE sales.addresses (
+    address_id INT IDENTITY PRIMARY KEY,
+    street VARCHAR (255) NOT NULL,
+    city VARCHAR (50),
+    state VARCHAR (25),
+    zip_code VARCHAR (5)
+);  
+---------------------------------------------
+INSERT INTO sales.addresses (street, city, state, zip_code) 
+SELECT
+    street,
+    city,
+    state,
+    zip_code
+FROM
+    sales.customers
+ORDER BY
+    first_name,
+    last_name; 
+----------------------------------------------
+SELECT
+    *
+FROM
+    sales.addresses;
+----------------------------------------------
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-insert-into-select/
+
+/* To demostrate the INSERT INTO clause, I need to create a table named sales.addresses.
+   then, would "copy" the addresess from customer table into the newly created
+   addresses table by using 'INSERT INTO' clause. As a verification, SELECT statement
+   is used to display the output.
+*/
+
+----------------------------------------------------------------------------------
+
+#41
+[INSERT INTO | WHERE CLAUSE]
+
+INSERT INTO 
+    sales.addresses (street, city, state, zip_code) 
+SELECT
+    street,
+    city,
+    state,
+    zip_code
+FROM
+    sales.stores
+WHERE
+    city IN ('Santa Cruz', 'Baldwin')
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-insert-into-select/
+
+(2 rows affected)
+
+Completion time: 2019-12-09T20:58:14.5918588-08:00
+
+
+/* Similar to the query #40, using the INSERT INTO, #41 is essentially the same
+   query as #40 except that it also has the WHERE clause that will sort out the
+   condition from sales.stores before 'INSERT INTO' clause is used to insert the
+   information into the sales.addresses
+*/
+
+----------------------------------------------------------------------------------
+
+#42
+[TRUNCATE]
+
+	
+TRUNCATE TABLE sales.addresses;
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-insert-into-select/
+
+/* Using this query, basically it would remove all rows from the addresses table.
+*/
+
+----------------------------------------------------------------------------------
+
+#43
+[INSERT TOP]
+
+INSERT TOP (50) PERCENT  
+INTO sales.addresses (street, city, state, zip_code) 
+SELECT
+    street,
+    city,
+    state,
+    zip_code
+FROM
+    sales.customers
+ORDER BY
+    first_name,
+    last_name;
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-left-join/
+
+(723 rows affected)
+
+Completion time: 2019-12-09T21:32:35.2282981-08:00
+
+/* Beside having INSERT INTO, additionally, I may just want to enter the first 50
+   percent or whatever that number might be into the new table. Along with that,
+   the data will be sorted out with ORDER BY condition. In this example query, it 
+   has the 50 percent of the total data, which the total row is 1445 and half of that
+   would the 723 rows. This provides more visibility and narrowing down the search
+   according to the business requirement.
+*/
+
+----------------------------------------------------------------------------------
+
+#44
+[UPDATE]
+
+CREATE TABLE sales.taxes (
+ tax_id INT PRIMARY KEY IDENTITY (1, 1),
+ state VARCHAR (50) NOT NULL UNIQUE,
+ state_tax_rate DEC (3, 2),
+ avg_local_tax_rate DEC (3, 2),
+ combined_rate AS state_tax_rate + avg_local_tax_rate,
+ max_local_tax_rate DEC (3, 2),
+ updated_at datetime
+);
+
+------------------------------------------
+
+INSERT INTO sales.taxes(state,state_tax_rate,avg_local_tax_rate,max_local_tax_rate) VALUES('Alabama',0.04,0.05,0.07);
+INSERT INTO sales.taxes(state,state_tax_rate,avg_local_tax_rate,max_local_tax_rate) VALUES('Alaska',0,0.01,0.07);
+INSERT INTO sales.taxes(state,state_tax_rate,avg_local_tax_rate,max_local_tax_rate) VALUES('Arizona',0.05,0.02,0.05);
+INSERT INTO sales.taxes(state,state_tax_rate,avg_local_tax_rate,max_local_tax_rate) VALUES('Arkansas',0.06,0.02,0.05);
+INSERT INTO sales.taxes(state,state_tax_rate,avg_local_tax_rate,max_local_tax_rate) VALUES('California',0.07,0.01,0.02);
+
+-------------------------------------------
+
+UPDATE sales.taxes
+SET updated_at = GETDATE();
+
+-------------------------------------------
+
+UPDATE sales.taxes
+SET max_local_tax_rate += 0.02,
+    avg_local_tax_rate += 0.01
+WHERE
+    max_local_tax_rate = 0.01;
+
+-------------------------------------------
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-insert/
+
+(5 row affected)
+
+Completion time: 2019-12-09T13:40:18.1565897-08:00
+
+
+/* First of all, a table is created with the values. Then using INSERT INTO,
+   more information is then inserted into the taxes table. If updates needs to be 
+   done, then UPDATE clause is utilized along with SET. This query shows that, 
+   updating same information across rows in table can be done all simultaneously
+*/
+
+----------------------------------------------------------------------------------
+
+#45
+[MERGE]
+
+MERGE sales.category t 
+    USING sales.category_staging s
+ON (s.category_id = t.category_id)
+WHEN MATCHED
+    THEN UPDATE SET 
+        t.category_name = s.category_name,
+        t.amount = s.amount
+WHEN NOT MATCHED BY TARGET 
+    THEN INSERT (category_id, category_name, amount)
+         VALUES (s.category_id, s.category_name, s.amount)
+WHEN NOT MATCHED BY SOURCE 
+    THEN DELETE;
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-merge/
+
+(6 rows affected)
+
+Completion time: 2019-12-09T22:05:21.9155920-08:00
+
+/* This query is merging sales.category (target table) with sales.category_staging
+   (source table) Those conditions are powerful in terms of the condition, where
+   it acts like a programming type (if..else) where if the category_id in 't' and 's'
+   matches, then update the set and it not matched in target table then INSERT while,
+   it is not matched with the source, then data row will be deleted. Just like GITHUB,
+   this query works like a source control, ensuring all data is updated with just 
+   a simple query.
+*/
+
+----------------------------------------------------------------------------------
+
+#46
+[Common Table Expression]
+
+WITH cte_sales_amounts (staff, sales, year) AS (
+    SELECT    
+        first_name + ' ' + last_name, 
+        SUM(quantity * list_price * (1 - discount)),
+        YEAR(order_date)
+    FROM    
+        sales.orders o
+    INNER JOIN sales.order_items i ON i.order_id = o.order_id
+    INNER JOIN sales.staffs s ON s.staff_id = o.staff_id
+    GROUP BY 
+        first_name + ' ' + last_name,
+        year(order_date)
+)
+ 
+SELECT
+    staff, 
+    sales
+FROM 
+    cte_sales_amounts
+WHERE
+    year = 2018;
+
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-cte/
+
+/* CTE means common table expression. Basically it's a temporary named result set.
+   With this query, the CTE is the cte_sales_amount where the information is derived
+   from first name, last name, sum of sales, and year.
+   
+*/
+
+----------------------------------------------------------------------------------
+
+#47
+[Common Table Expression]
+
+WITH cte_sales AS (
+    SELECT 
+        staff_id, 
+        COUNT(*) order_count  
+    FROM
+        sales.orders
+    WHERE 
+        YEAR(order_date) = 2018
+    GROUP BY
+        staff_id
+ 
+)
+SELECT
+        max(order_count) highest_orders_by_staff,
+	avg(order_count) average_orders_by_staff,
+	min(order_count) lowest_orders_by_staff
+FROM 
+    cte_sales;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-cte/
+
+/* This query allows me to find out which staff/employee have the highest orders,
+   on average orders, and the most minimum orders. 
+   
+*/
+
+----------------------------------------------------------------------------------
+
+#47
+[Common Table Expression]
+
+WITH cte_sales AS (
+    SELECT 
+        staff_id, 
+        COUNT(*) order_count  
+    FROM
+        sales.orders
+    WHERE 
+        YEAR(order_date) = 2018
+    GROUP BY
+        staff_id
+ 
+)
+SELECT
+        max(order_count) highest_orders_by_staff,
+	avg(order_count) average_orders_by_staff,
+	min(order_count) lowest_orders_by_staff
+FROM 
+    cte_sales;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-cte/
+
+/* This query allows me to find out which staff/employee have the highest orders,
+   on average orders, and the most minimum orders. 
+   
+*/
+
+----------------------------------------------------------------------------------
+
+#48
+[PIVOT]
+
+SELECT * FROM   
+(
+    SELECT 
+        category_name, 
+        product_id
+    FROM 
+        production.products p
+        INNER JOIN production.categories c 
+            ON c.category_id = p.category_id
+) t 
+PIVOT(
+    COUNT(product_id) 
+    FOR category_name IN (
+        [Children Bicycles], 
+        [Comfort Bicycles], 
+        [Cruisers Bicycles], 
+        [Cyclocross Bicycles], 
+        [Electric Bikes], 
+        [Mountain Bikes], 
+        [Road Bikes])
+) AS pivot_table;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-pivot/
+
+/* This PIVOT statement enables the query to turn values in one column into multiple
+   column depending on the condition defined.  
+*/
+
+----------------------------------------------------------------------------------
+
+#49
+[PIVOT]
+
+SELECT * FROM   
+(
+    SELECT 
+        category_name, 
+        product_id,
+        model_year
+    FROM 
+        production.products p
+        INNER JOIN production.categories c 
+            ON c.category_id = p.category_id
+) t 
+PIVOT(
+    COUNT(product_id) 
+    FOR category_name IN (
+        [Children Bicycles], 
+        [Comfort Bicycles], 
+        [Cruisers Bicycles], 
+        [Cyclocross Bicycles], 
+        [Electric Bikes], 
+        [Mountain Bikes], 
+        [Road Bikes])
+) AS pivot_table;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-pivot/
+
+/* Same as before, PIVOT is used however this time, the query would return the output
+   based upon the model_year.  
+*/
+
+----------------------------------------------------------------------------------
+
+#50
+[ALTER TABLE ADD]
+
+CREATE TABLE sales.quotations (
+    quotation_no INT IDENTITY PRIMARY KEY,
+    valid_from DATE NOT NULL,
+    valid_to DATE NOT NULL
+);
+-------------------------------------------
+
+ALTER TABLE sales.quotations 
+ADD description VARCHAR (255) NOT NULL;
+
+--------------------------------------------
+
+ALTER TABLE sales.quotations 
+    ADD 
+        amount DECIMAL (10, 2) NOT NULL,
+        customer_name VARCHAR (50) NOT NULL;
+
+Source: http://www.sqlservertutorial.net/sql-server-basics/sql-server-alter-table-add-column/
+
+/* In this query, when new information arises and just needed to be added into
+   the existing table, 'ALTER TABLE' can be use to create additional rows to the
+   table without changing or deleting the table at all.
+*/
+
+----------------------------------------------------------------------------------
 
